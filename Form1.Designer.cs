@@ -33,6 +33,7 @@ namespace WinFormsApp
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.score = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,17 +61,29 @@ namespace WinFormsApp
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
+            // score
+            // 
+            this.score.AutoSize = true;
+            this.score.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.score.Location = new System.Drawing.Point(704, 9);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(59, 20);
+            this.score.TabIndex = 2;
+            this.score.Text = "Очки: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 450);
+            this.Controls.Add(this.score);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -79,6 +92,7 @@ namespace WinFormsApp
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label score;
     }
 }
 

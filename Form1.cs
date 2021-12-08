@@ -13,8 +13,10 @@ namespace WinFormsApp
 {
     public partial class Form1 : Form
     {
+        private int scoreP = 0;
         private Marker marker;
         private Player player;
+        private Figure figure;
         private List<BaseObject> objects = new();
 
         public Form1()
@@ -37,14 +39,25 @@ namespace WinFormsApp
                 marker = null;
             };
 
+            //Добавляем реакцию на пересечение с фигурой
+            player.OnFigureOverlap += (f) =>
+            {
+                this.scoreP++;
+                objects.Remove(f);
+                figure = null;
+            };
+
             //Создаём маркер
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
 
+            figure = new Figure(pbMain.Width / 2 - 50, pbMain.Height / 2 - 50, 0);
+
             objects.Add(marker);
             objects.Add(player);
+            objects.Add(figure);
 
-            objects.Add(new Figure(50, 25, 45));
-            objects.Add(new Figure(100, 80, 45));
+            objects.Add(new Figure(pbMain.Width / 3 + 50, pbMain.Height / 3 + 50, 0));
+            objects.Add(new Figure(pbMain.Width / 2 - 100, pbMain.Height / 2 - 100, 0));
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
@@ -110,6 +123,13 @@ namespace WinFormsApp
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            var rnd = new Random();
+            if (figure == null)
+            {
+                score.Text = "Очков: " + scoreP;
+                figure = new Figure(rnd.Next() % pbMain.Width, rnd.Next() % pbMain.Height, 0);
+                objects.Add(figure);
+            }
             //запрашиваем обновление pbMain
             //это вызовет метод pbMain_Paint по новой
             pbMain.Invalidate();
@@ -120,7 +140,7 @@ namespace WinFormsApp
             if (marker == null)
             {
                 marker = new Marker(0, 0, 0);
-                objects.Add(marker); // и главное не забыть пололжить в objects
+                objects.Add(marker); // и главное не забыть положить в objects
             }
             marker.X = e.X;
             marker.Y = e.Y;

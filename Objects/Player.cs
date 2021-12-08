@@ -11,6 +11,7 @@ namespace WinFormsApp.Objects
     internal class Player : BaseObject
     {
         public Action<Marker> OnMarkerOverlap;
+        public Action<Figure> OnFigureOverlap;
         public float vX, vY;
 
         public Player(float x, float y, float angle) : base(x, y, angle)
@@ -48,6 +49,11 @@ namespace WinFormsApp.Objects
             if (baseObject is Marker)
             {
                 OnMarkerOverlap(baseObject as Marker);
+            }
+
+            if (baseObject is Figure)
+            {
+                OnFigureOverlap(baseObject as Figure);
             }
         }
     }
